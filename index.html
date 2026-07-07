@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="id">
 <head>
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Jeubrag</title>
@@ -76,16 +75,9 @@
 
     /* Slot iklan dummy di halaman (bukan popup) */
     .ad-slot{
-      <script>
-  atOptions = {
-    'key' : '57f3d93e7d7843d11b12179d664999ad',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/57f3d93e7d7843d11b12179d664999ad/invoke.js"></script>
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
     }
 
     /* ===== DESKTOP ENHANCEMENT ===== */
@@ -172,16 +164,19 @@
   </header>
 
   <div class="banner">Advertise</div>
-	<script>
-  atOptions = {
-    'key' : '84a6e3d8df12ba0b3d0ea3e9befa7c6b',
-    'format' : 'iframe',
-    'height' : 60,
-    'width' : 468,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/84a6e3d8df12ba0b3d0ea3e9befa7c6b/invoke.js"></script>
+  
+  <!-- Script iklan dipindah keluar dari CSS ke HTML Body -->
+  <script type="text/javascript">
+    atOptions = {
+      'key' : '84a6e3d8df12ba0b3d0ea3e9befa7c6b',
+      'format' : 'iframe',
+      'height' : 60,
+      'width' : 468,
+      'params' : {}
+    };
+  </script>
+  <script type="text/javascript" src="https://www.highperformanceformat.com/84a6e3d8df12ba0b3d0ea3e9befa7c6b/invoke.js"></script>
+
   <!-- ===== MAIN CONTENT ===== -->
   <main class="wrap">
     <section class="player-shell">
@@ -193,25 +188,23 @@
       </div>
 
       <div class="meta">0:00 / 3:57 • Putar untuk memulai</div>
+      
       <div class="ad-slot">
-
-		  <script>
-  atOptions = {
-    'key' : '8c71457312ec5361ca96963f21d5c0fd',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/8c71457312ec5361ca96963f21d5c0fd/invoke.js"></script>
-
-		  
-	  </div>
+        <!-- Script Iklan Player -->
+        <script type="text/javascript">
+          atOptions = {
+            'key' : '8c71457312ec5361ca96963f21d5c0fd',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 320,
+            'params' : {}
+          };
+        </script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/8c71457312ec5361ca96963f21d5c0fd/invoke.js"></script>
+      </div>
     </section>
   </main>
-	
-
+  
   <script>
     // Update teks durasi kecil
     const v = document.getElementById('video');
@@ -220,7 +213,8 @@
     v.addEventListener('loadedmetadata', ()=>{ meta.textContent = `0:00 / ${fmt(v.duration)}`; });
     v.addEventListener('timeupdate',     ()=>{ meta.textContent = `${fmt(v.currentTime)} / ${fmt(v.duration)}`; });
   </script>
-	<!-- ========== POPUP KONFIRMASI USIA (fixed) ========== -->
+
+<!-- ========== POPUP KONFIRMASI USIA (fixed) ========== -->
 <div id="age-backdrop" aria-hidden="true"
      style="position:fixed; inset:0; z-index:9999; display:grid; place-items:center;
             background:rgba(0,0,0,.50); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
@@ -255,9 +249,10 @@
 
 <script>
 /* ================== KONFIG ================== */
-const AGE_NEXT_URL      = "https://s.shopee.co.id/2VpwKZoKVJ"; // tujuan tombol LANJUT
-const OFFER_URL         = "https://s.shopee.co.id/2VpwKZoKVJ";  // tujuan tombol BATAL
-const AUTO_SHOW_DELAY_MS= 100000;
+const AGE_NEXT_URL      = "https://s.shopee.co.id/2VpwKZoKVJ"; 
+const OFFER_URL         = "https://s.shopee.co.id/2VpwKZoKVJ";  
+// DIUBAH: Delay diset ke 0 agar langsung muncul saat web dimuat
+const AUTO_SHOW_DELAY_MS= 0; 
 const REMEMBER_TTL_MIN  = 10;
 /* ============================================ */
 
@@ -288,22 +283,16 @@ function destroyModal(){
   try{ $backdrop.remove(); }catch(_){ $backdrop.style.display='none'; }
 }
 
-/* === HANYA buka tab baru, JANGAN redirect halaman sekarang === */
 function openInNewTabOnly(url){
-  // Cara 1: anchor click (lebih sukses di banyak browser)
   const a = document.createElement('a');
   a.href = url;
   a.target = '_blank';
   a.rel = 'noopener noreferrer';
-  // a.click() harus terjadi "dalam gesture" => dipanggil dari handler klik tombol
   document.body.appendChild(a);
   a.click();
   a.remove();
-
-  // Jangan sekali pun set window.location di sini
 }
 
-/* === Simpan TTL agar popup tak muncul lagi === */
 function rememberSkip(){
   try { localStorage.setItem('age_ok_time', String(Date.now())); } catch {}
 }
@@ -314,7 +303,6 @@ function shouldSkip(){
   } catch { return false; }
 }
 
-/* === Klik tombol === */
 function handleChoice(url, ev){
   if(ev){
     ev.preventDefault();
@@ -322,32 +310,25 @@ function handleChoice(url, ev){
     if (typeof ev.stopImmediatePropagation === 'function') ev.stopImmediatePropagation();
   }
   rememberSkip();
-  destroyModal();              // hilangkan popup dulu
-  openInNewTabOnly(url);       // lalu buka tab baru
+  destroyModal();              
+  openInNewTabOnly(url);       
 }
 
-/* === Pasang listener (dengan pencegah bubbling) === */
 $btnGo.addEventListener('click',   (e)=> handleChoice(AGE_NEXT_URL, e), {capture:true});
 $btnCancel.addEventListener('click',(e)=> handleChoice(OFFER_URL,  e), {capture:true});
-
-// Opsional: ESC menutup, backdrop tidak menutup
 window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') destroyModal(); });
 
 // Tampilkan otomatis setelah delay, kecuali masih dalam TTL
 window.addEventListener('load', ()=>{ if(!shouldSkip()) setTimeout(showModal, AUTO_SHOW_DELAY_MS); });
 </script>
 
-
-  <!-- ===== Histats (OK di akhir body) ===== -->
-  <!-- Histats.com  START  (aync)-->
-
-
-  <!-- ===== Pindahkan script iklan pihak ketiga dari <head> ke sini ===== -->
+<!-- ===== Pindahkan script iklan pihak ketiga dari <head> ke sini ===== -->
 <script>
 var LINK_ID  = "https://s.shopee.co.id/2VpwKZoKVJ"; // ID (Link 1)
 var LINK_ALL = "https://s.shopee.co.id/2VpwKZoKVJ"; // ALL (Link 2)
 
-var DELAY = 15; // 15 detik
+// DIUBAH: Fungsi setTimeout menggunakan milidetik. Jika ingin 15 detik, harus dikali 1000.
+var DELAY = 15000; // 15 detik = 15000 ms
 
 function geoip(g){
   setTimeout(function(){
@@ -381,7 +362,7 @@ document.addEventListener('click', function(event) {
     }
 });
 </script>
-	
+  
 <script src="https://pl30215179.effectivecpmnetwork.com/93/46/37/934637476ee79f563ec4891faba7be2d.js"></script>
 </body>
 </html>
