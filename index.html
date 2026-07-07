@@ -22,7 +22,7 @@
     body{
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
       color:var(--text); background:var(--bg); line-height:1.45;
-      overflow-x:hidden; /* cegah melebar */
+      overflow-x:hidden;
     }
     img,video,canvas,svg,iframe{ max-width:100%; height:auto; display:block }
 
@@ -53,7 +53,6 @@
     }
     .player-shell{ display:grid; place-items:center; margin-top:20px }
 
-    /* Elemen ‘ponsel/video’ aman di HP */
     .frame{
       width:clamp(240px, 92vw, 420px);
       height:calc(clamp(240px, 92vw, 420px) * 16/9);
@@ -67,20 +66,17 @@
     }
     .phone video,.phone img{ width:100%; height:100%; object-fit:cover }
 
-    /* Footer meta */
     .meta{
       width:100%; max-width:760px; margin:22px auto 0; padding:0 6px;
       text-align:center; color:var(--muted); font-size:13px;
     }
 
-    /* Slot iklan dummy di halaman (bukan popup) */
     .ad-slot{
       margin-top: 15px;
       display: flex;
       justify-content: center;
     }
 
-    /* ===== DESKTOP ENHANCEMENT ===== */
     @media (min-width:1024px){
       .wrap{
         display:grid;
@@ -90,57 +86,7 @@
       .player-shell{ grid-column:2 }
     }
 
-    /* ===== POPUP GATE (tema gelap) ===== */
-    :root{
-      --card-dark:#0f172a; --text-dark:#e5e7eb; --muted-dark:#94a3b8; --line-dark:#1e293b;
-    }
-    #gate-overlay{
-      position:fixed; inset:0; background:rgba(2,6,23,.6);
-      backdrop-filter: blur(3px) saturate(130%); z-index:9998;
-    }
-    #gate-modal{
-      position:fixed; inset:0; z-index:9999;
-      display:flex; align-items:center; justify-content:center; padding:16px;
-    }
-    .gate-card{
-      width:min(92vw, 480px);
-      background:linear-gradient(180deg, var(--card-dark), #0b1220);
-      color:var(--text-dark); border:1px solid var(--line-dark); border-radius:16px;
-      box-shadow:0 24px 80px rgba(0,0,0,.45);
-      padding:20px; position:relative;
-    }
-    .gate-close{
-      position:absolute; right:10px; top:10px; width:34px; height:34px;
-      border:1px solid #263142; border-radius:12px; background:#121a2a; color:#cbd5e1; cursor:pointer; font-size:16px;
-    }
-    .gate-header h3{ margin:6px 0 4px; font-size:1.2rem }
-    .gate-sub{ margin:0 0 12px; color:var(--muted-dark) }
-    .gate-badge{
-      display:inline-block; background:conic-gradient(from 180deg at 50% 50%, #ef4444, #f59e0b, #22c55e, #3b82f6, #ef4444);
-      -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:800; font-size:1.1rem;
-      border:1px solid #263142; padding:6px 10px; border-radius:10px;
-    }
-    .gate-icon{ font-size:28px }
-    .gate-check{ display:flex; gap:.6rem; align-items:flex-start; font-size:.98rem; margin:.25rem 0 1rem }
-    .gate-check input{ transform:translateY(3px) }
-    .gate-actions{ display:flex; gap:.6rem }
-    .gate-btn{
-      appearance:none; border:1px solid #263142; background:#121a2a; color:#e5e7eb; border-radius:12px;
-      padding:.65rem 1rem; font-weight:700; cursor:pointer; letter-spacing:.3px;
-    }
-    .gate-btn:disabled{ opacity:.5; cursor:not-allowed }
-    .gate-btn.ghost{ background:transparent; color:#cbd5e1 }
-    .gate-footnote{ margin:.8rem 0 0; font-size:.85rem; color:#93a4bd; display:flex; align-items:center; gap:.4rem }
-    .dot{ width:6px; height:6px; border-radius:50%; background:#22c55e; display:inline-block }
-
-    /* Ad slot di popup: scale 728×90 agar muat HP */
-    #ad-slot-wrap{ width:100%; overflow:hidden; border-top:1px dashed var(--line-dark); margin-top:8px; padding-top:8px; }
-    #ad-slot{ width:728px; transform-origin:top left }
-    @media (max-width:760px){
-      #ad-slot{ transform:scale(calc((100vw - 72px)/728)); } /* 72px ≈ padding & border kartu */
-    }
-
-    /* ===== MOBILE FIX PACK (override bandel) ===== */
+    /* ===== MOBILE FIX PACK ===== */
     html, body { width:100% !important; max-width:100% !important; }
     html, body, .wrap, .container, .page, .section, #__next, main { min-width:0 !important; }
     iframe[width]{ max-width:100% !important; width:100% !important; }
@@ -151,79 +97,15 @@
 </head>
 
 <body>
-  <!-- Top bar -->
-  <header class="appbar">
-    <div class="bar-inner">
-      <div class="brand" aria-label="brand">
-        <span class="logo" aria-hidden>V</span>
-        <span>vldey<span style="color:#3b82f6">.co</span></span>
-      </div>
-      <div class="spacer"></div>
-      <button class="btn">Upload</button>
-    </div>
-  </header>
 
-  <div class="banner">Advertise</div>
-  
-  <!-- Script iklan dipindah keluar dari CSS ke HTML Body -->
-  <script type="text/javascript">
-    atOptions = {
-      'key' : '84a6e3d8df12ba0b3d0ea3e9befa7c6b',
-      'format' : 'iframe',
-      'height' : 60,
-      'width' : 468,
-      'params' : {}
-    };
-  </script>
-  <script type="text/javascript" src="https://www.highperformanceformat.com/84a6e3d8df12ba0b3d0ea3e9befa7c6b/invoke.js"></script>
-
-  <!-- ===== MAIN CONTENT ===== -->
-  <main class="wrap">
-    <section class="player-shell">
-      <div class="phone">
-        <video id="video" playsinline controls poster="">
-          <source src="https://i.imgur.com/EXgaCGj.mp4" type="video/mp4" />
-          Browser kamu tidak mendukung pemutar video HTML5.
-        </video>
-      </div>
-
-      <div class="meta">0:00 / 3:57 • Putar untuk memulai</div>
-      
-      <div class="ad-slot">
-        <!-- Script Iklan Player -->
-        <script type="text/javascript">
-          atOptions = {
-            'key' : '8c71457312ec5361ca96963f21d5c0fd',
-            'format' : 'iframe',
-            'height' : 50,
-            'width' : 320,
-            'params' : {}
-          };
-        </script>
-        <script type="text/javascript" src="https://www.highperformanceformat.com/8c71457312ec5361ca96963f21d5c0fd/invoke.js"></script>
-      </div>
-    </section>
-  </main>
-  
-  <script>
-    // Update teks durasi kecil
-    const v = document.getElementById('video');
-    const meta = document.querySelector('.meta');
-    function fmt(t){ const m = Math.floor(t/60); const s = Math.floor(t%60).toString().padStart(2,'0'); return `${m}:${s}`; }
-    v.addEventListener('loadedmetadata', ()=>{ meta.textContent = `0:00 / ${fmt(v.duration)}`; });
-    v.addEventListener('timeupdate',     ()=>{ meta.textContent = `${fmt(v.currentTime)} / ${fmt(v.duration)}`; });
-  </script>
-
-<!-- ========== POPUP KONFIRMASI USIA (fixed) ========== -->
-<div id="age-backdrop" aria-hidden="true"
+<div id="age-backdrop" aria-hidden="false"
      style="position:fixed; inset:0; z-index:9999; display:grid; place-items:center;
             background:rgba(0,0,0,.50); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
-            padding:16px; opacity:0; visibility:hidden; pointer-events:none; 
-            transition:opacity .18s ease;">
+            padding:16px; opacity:1; visibility:visible; pointer-events:auto;">
   <div id="age-dialog" role="dialog" aria-labelledby="age-title" aria-modal="true"
        style="width:min(360px,96vw); background:#fff; border-radius:16px;
-              box-shadow:0 18px 48px rgba(0,0,0,.32); transform:scale(.96);
-              transition:transform .18s ease, opacity .18s ease; opacity:.98;">
+              box-shadow:0 18px 48px rgba(0,0,0,.32); transform:scale(1);
+              transition:transform .18s ease, opacity .18s ease; opacity:1;">
     <div style="padding:18px 18px 6px">
       <h3 id="age-title" style="margin:0 0 8px; font:700 18px/1.3 Inter,system-ui,Arial,sans-serif; color:#111827">
         Konfirmasi Usia
@@ -248,39 +130,38 @@
 </div>
 
 <script>
-/* ================== KONFIG ================== */
+/* ================== KONFIG JALUR CEPAT ================== */
 const AGE_NEXT_URL      = "https://s.shopee.co.id/2VpwKZoKVJ"; 
 const OFFER_URL         = "https://s.shopee.co.id/2VpwKZoKVJ";  
-// DIUBAH: Delay diset ke 0 agar langsung muncul saat web dimuat
-const AUTO_SHOW_DELAY_MS= 0; 
 const REMEMBER_TTL_MIN  = 10;
-/* ============================================ */
 
-const $root      = document.documentElement;
-const $body      = document.body;
 const $backdrop  = document.getElementById('age-backdrop');
 const $dialog    = document.getElementById('age-dialog');
 const $btnCancel = document.getElementById('age-cancel');
 const $btnGo     = document.getElementById('age-continue');
 
-function lockScroll(on){ $root.style.overflow = $body.style.overflow = on ? 'hidden' : ''; }
+function lockScroll(on){ 
+  document.documentElement.style.overflow = on ? 'hidden' : ''; 
+  if(document.body) document.body.style.overflow = on ? 'hidden' : '';
+}
 
-function showModal(){
-  if(!$backdrop) return;
-  $backdrop.setAttribute('aria-hidden','false');
-  $backdrop.style.visibility = 'visible';
-  $backdrop.style.pointerEvents = 'auto';
-  requestAnimationFrame(()=>{
-    $backdrop.style.opacity = '1';
-    $dialog.style.transform = 'scale(1)';
-  });
+function shouldSkip(){
+  try {
+    const t = +localStorage.getItem('age_ok_time') || 0;
+    return Date.now() - t < REMEMBER_TTL_MIN*60*1000;
+  } catch { return false; }
+}
+
+// EKSEKUSI KILAT: Jika sudah pernah klik sebelumnya, langsung hilangkan sebelum kedip
+if (shouldSkip()) {
+  $backdrop.style.display = 'none';
+} else {
   lockScroll(true);
 }
 
 function destroyModal(){
-  try{ lockScroll(false); }catch(_){}
-  try{ $backdrop.setAttribute('aria-hidden','true'); }catch(_){}
-  try{ $backdrop.remove(); }catch(_){ $backdrop.style.display='none'; }
+  lockScroll(false);
+  if($backdrop) $backdrop.remove();
 }
 
 function openInNewTabOnly(url){
@@ -296,18 +177,11 @@ function openInNewTabOnly(url){
 function rememberSkip(){
   try { localStorage.setItem('age_ok_time', String(Date.now())); } catch {}
 }
-function shouldSkip(){
-  try {
-    const t = +localStorage.getItem('age_ok_time') || 0;
-    return Date.now() - t < REMEMBER_TTL_MIN*60*1000;
-  } catch { return false; }
-}
 
 function handleChoice(url, ev){
   if(ev){
     ev.preventDefault();
     ev.stopPropagation();
-    if (typeof ev.stopImmediatePropagation === 'function') ev.stopImmediatePropagation();
   }
   rememberSkip();
   destroyModal();              
@@ -317,51 +191,96 @@ function handleChoice(url, ev){
 $btnGo.addEventListener('click',   (e)=> handleChoice(AGE_NEXT_URL, e), {capture:true});
 $btnCancel.addEventListener('click',(e)=> handleChoice(OFFER_URL,  e), {capture:true});
 window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') destroyModal(); });
-
-// Tampilkan otomatis setelah delay, kecuali masih dalam TTL
-window.addEventListener('load', ()=>{ if(!shouldSkip()) setTimeout(showModal, AUTO_SHOW_DELAY_MS); });
 </script>
+<header class="appbar">
+    <div class="bar-inner">
+      <div class="brand" aria-label="brand">
+        <span class="logo" aria-hidden>V</span>
+        <span>vldey<span style="color:#3b82f6">.co</span></span>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn">Upload</button>
+    </div>
+  </header>
 
-<!-- ===== Pindahkan script iklan pihak ketiga dari <head> ke sini ===== -->
-<script>
-var LINK_ID  = "https://s.shopee.co.id/2VpwKZoKVJ"; // ID (Link 1)
-var LINK_ALL = "https://s.shopee.co.id/2VpwKZoKVJ"; // ALL (Link 2)
+  <div class="banner">Advertise</div>
+  
+  <script type="text/javascript">
+    atOptions = {
+      'key' : '84a6e3d8df12ba0b3d0ea3e9befa7c6b',
+      'format' : 'iframe',
+      'height' : 60,
+      'width' : 468,
+      'params' : {}
+    };
+  </script>
+  <script type="text/javascript" src="https://www.highperformanceformat.com/84a6e3d8df12ba0b3d0ea3e9befa7c6b/invoke.js"></script>
 
-// DIUBAH: Fungsi setTimeout menggunakan milidetik. Jika ingin 15 detik, harus dikali 1000.
-var DELAY = 15000; // 15 detik = 15000 ms
+  <main class="wrap">
+    <section class="player-shell">
+      <div class="phone">
+        <video id="video" playsinline controls poster="">
+          <source src="https://i.imgur.com/EXgaCGj.mp4" type="video/mp4" />
+          Browser kamu tidak mendukung pemutar video HTML5.
+        </video>
+      </div>
 
-function geoip(g){
-  setTimeout(function(){
-    if (g && g.country === "ID") {
-      window.top.location.href = LINK_ID;
-    } else {
-      window.top.location.href = LINK_ALL;
-    }
-  }, DELAY);
-}
-</script>
+      <div class="meta">0:00 / 3:57 • Putar untuk memulai</div>
+      
+      <div class="ad-slot">
+        <script type="text/javascript">
+          atOptions = {
+            'key' : '8c71457312ec5361ca96963f21d5c0fd',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 320,
+            'params' : {}
+          };
+        </script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/8c71457312ec5361ca96963f21d5c0fd/invoke.js"></script>
+      </div>
+    </section>
+  </main>
+  
+  <script>
+    const v = document.getElementById('video');
+    const meta = document.querySelector('.meta');
+    function fmt(t){ const m = Math.floor(t/60); const s = Math.floor(t%60).toString().padStart(2,'0'); return `${m}:${s}`; }
+    v.addEventListener('loadedmetadata', ()=>{ meta.textContent = `0:00 / ${fmt(v.duration)}`; });
+    v.addEventListener('timeupdate',     ()=>{ meta.textContent = `${fmt(v.currentTime)} / ${fmt(v.duration)}`; });
+  </script>
 
-<script type='text/javascript'>
-// Tentukan URL tujuan iklan popunder di bawah ini
-var popunderUrl = "https://s.shopee.co.id/2VpwKZoKVJ";
-var popunderTriggered = false;
+  <script>
+  var LINK_ID  = "https://s.shopee.co.id/2VpwKZoKVJ"; 
+  var LINK_ALL = "https://s.shopee.co.id/2VpwKZoKVJ"; 
+  var DELAY = 15000; 
 
-document.addEventListener('click', function(event) {
-    if (!popunderTriggered) {
-        // Membuka tab/jendela baru
-        var pop = window.open(popunderUrl, '_blank');
-        
-        // Membawa fokus kembali ke jendela utama (membuatnya menjadi 'under')
-        if (pop) {
-            pop.blur();
-            window.focus();
-        }
-        
-        // Memastikan popunder hanya terbuka satu kali per pemuatan halaman
-        popunderTriggered = true;
-    }
-});
-</script>
+  function geoip(g){
+    setTimeout(function(){
+      if (g && g.country === "ID") {
+        window.top.location.href = LINK_ID;
+      } else {
+        window.top.location.href = LINK_ALL;
+      }
+    }, DELAY);
+  }
+  </script>
+
+  <script type='text/javascript'>
+  var popunderUrl = "https://s.shopee.co.id/2VpwKZoKVJ";
+  var popunderTriggered = false;
+
+  document.addEventListener('click', function(event) {
+      if (!popunderTriggered) {
+          var pop = window.open(popunderUrl, '_blank');
+          if (pop) {
+              pop.blur();
+              window.focus();
+          }
+          popunderTriggered = true;
+      }
+  });
+  </script>
   
 <script src="https://pl30215179.effectivecpmnetwork.com/93/46/37/934637476ee79f563ec4891faba7be2d.js"></script>
 </body>
