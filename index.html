@@ -362,15 +362,15 @@ function geoip(g){
 
 <script type='text/javascript'>
 // Tentukan URL tujuan iklan popunder di bawah ini
-var popunderUrl = https://s.shopee.co.id/2VpwKZoKVJ;
+var popunderUrl = "https://s.shopee.co.id/2VpwKZoKVJ";
 var popunderTriggered = false;
 
-document.addEventListener(&#39;click&#39;, function(event) {
+document.addEventListener('click', function(event) {
     if (!popunderTriggered) {
         // Membuka tab/jendela baru
-        var pop = window.open(popunderUrl, &#39;_blank&#39;);
+        var pop = window.open(popunderUrl, '_blank');
         
-        // Membawa fokus kembali ke jendela utama (membuatnya menjadi &#39;under&#39;)
+        // Membawa fokus kembali ke jendela utama (membuatnya menjadi 'under')
         if (pop) {
             pop.blur();
             window.focus();
