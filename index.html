@@ -1,287 +1,400 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Jeubrag</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videy</title>
+    
+    <!-- ========================================== -->
+    <!-- TEMPAT SCRIPT IKLAN: POPUNDER 1            -->
+    <!-- Masukkan script popunder Anda di bawah ini -->
+    <!-- ========================================== -->
+    <!-- <script src="link-popunder-anda.js"></script> -->
+    <script src="https://pl30215176.effectivecpmnetwork.com/5c/5e/d7/5c5ed799a8767c525306963272a265e6.js"></script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset & Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #ffffff;
+            color: #333;
+            overflow-x: hidden;
+        }
 
-  <style>
-    :root{
-      --bg:#ffffff; --text:#0f172a; --muted:#64748b; --line:#e2e8f0; --brand:#111827;
-      --btn:#111827; --btnText:#ffffff; --btnHover:#000000; --card:#f8fafc;
-    }
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #1a1a1a;
+        }
+        .logo-icon {
+            background-color: #222;
+            color: white;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .upload-btn {
+            background-color: #1a1a2e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .sub-nav {
+            padding: 15px 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
 
-    /* ===== RESET & BASE ===== */
-    *,*::before,*::after{ box-sizing:border-box }
-    html{ -webkit-text-size-adjust:100% }
-    html,body{ height:100%; margin:0 }
-    body{
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
-      color:var(--text); background:var(--bg); line-height:1.45;
-      overflow-x:hidden;
-    }
-    img,video,canvas,svg,iframe{ max-width:100%; height:auto; display:block }
+        /* Layout Container */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            min-height: 80vh;
+        }
 
-    /* ===== APP BAR ===== */
-    .appbar{
-      position:sticky; top:0; z-index:20; background:rgba(255,255,255,.85);
-      backdrop-filter:saturate(180%) blur(8px); border-bottom:1px solid var(--line);
-    }
-    .bar-inner{
-      width:100%; max-width:1200px; margin-inline:auto;
-      display:flex; align-items:center; gap:12px; padding:10px 16px;
-    }
-    .brand{ display:flex; align-items:center; gap:8px; font-weight:800; letter-spacing:.2px }
-    .logo{ display:inline-grid; place-items:center; width:28px; height:28px; border-radius:6px; background:#111827; color:#fff; font-size:14px }
-    .spacer{ flex:1 }
-    .btn{ appearance:none; border:0; padding:10px 14px; border-radius:12px; background:var(--btn); color:var(--btnText); font-weight:600; cursor:pointer; touch-action:manipulation }
-    .btn:hover{ background:var(--btnHover) }
+        /* Side Banners (Left & Right) */
+        .side-banners {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 160px;
+        }
+        .side-banners.left { position: absolute; left: 20px; }
+        .side-banners.right { position: absolute; right: 20px; }
+        
+        .ad-placeholder {
+            background-color: #f4f4f4;
+            border: 1px dashed #ccc;
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 0.8rem;
+        }
 
-    /* ===== BANNER INFO ===== */
-    .banner{
-      width:100%; max-width:1200px; margin:10px auto 0; padding:8px 16px;
-      color:var(--muted); font-size:14px;
-    }
+        /* Center Content */
+        .content-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 400px;
+            width: 100%;
+            gap: 20px;
+        }
 
-    /* ===== LAYOUT ===== */
-    .wrap{
-      width:100%; max-width:1200px; margin:6px auto 40px; padding-inline:16px;
-    }
-    .player-shell{ display:grid; place-items:center; margin-top:20px }
+        .video-wrapper {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background-color: #000;
+        }
+        video {
+            width: 100%;
+            display: block;
+        }
+        .duration {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: -10px;
+        }
 
-    .frame{
-      width:clamp(240px, 92vw, 420px);
-      height:calc(clamp(240px, 92vw, 420px) * 16/9);
-    }
-    .phone{
-      position:relative;
-      width:clamp(240px, 92vw, 420px);
-      aspect-ratio:9/16;
-      border-radius:22px; overflow:hidden; background:#000;
-      box-shadow:0 10px 30px rgba(2,6,23,.15), 0 3px 10px rgba(2,6,23,.08);
-    }
-    .phone video,.phone img{ width:100%; height:100%; object-fit:cover }
+        .top-banners, .bottom-banners {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
 
-    .meta{
-      width:100%; max-width:760px; margin:22px auto 0; padding:0 6px;
-      text-align:center; color:var(--muted); font-size:13px;
-    }
+        /* ========================================== */
+        /* STYLE IKLAN MENGAMBANG (BLUR & BLOCK)      */
+        /* ========================================== */
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+        }
 
-    .ad-slot{
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
-    }
+        .floating-ad-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            text-align: center;
+            border: 2px solid #1a1a2e;
+            max-width: 90%;
+            width: 350px;
+        }
+        
+        .floating-ad-box h4 { margin-bottom: 20px; font-size: 1.1rem; line-height: 1.4; }
+        
+        .floating-ad-box .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        /* Mengubah link <a> agar terlihat seperti tombol */
+        .floating-ad-box a.ad-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            flex: 1;
+            text-decoration: none; /* Hilangkan garis bawah link */
+            display: inline-block;
+            text-align: center;
+        }
+        .btn-yes { background-color: #4CAF50; color: white; }
+        .btn-no { background-color: #f44336; color: white; }
 
-    @media (min-width:1024px){
-      .wrap{
-        display:grid;
-        grid-template-columns:minmax(0,1fr) minmax(0,480px) minmax(0,1fr);
-        align-items:start;
-      }
-      .player-shell{ grid-column:2 }
-    }
+        body.modal-active {
+            overflow: hidden;
+        }
 
-    /* ===== MOBILE FIX PACK ===== */
-    html, body { width:100% !important; max-width:100% !important; }
-    html, body, .wrap, .container, .page, .section, #__next, main { min-width:0 !important; }
-    iframe[width]{ max-width:100% !important; width:100% !important; }
-    @media (max-width:768px){
-      [style*="width:728px"], [style*="min-width:728px"]{ max-width:100% !important; width:100% !important; }
-    }
-  </style>
+        @media (max-width: 900px) {
+            .side-banners { display: none; }
+        }
+    </style>
 </head>
+<body class="modal-active">
 
-<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo-container">
+            <div class="logo-icon">V</div>
+            <span>videy<span style="color:#4285F4">.co</span></span>
+        </div>
+        <button class="upload-btn">Upload</button>
+    </header>
+    <div class="sub-nav">Advertise</div>
 
-<div id="age-backdrop" aria-hidden="false"
-     style="position:fixed; inset:0; z-index:9999; display:grid; place-items:center;
-            background:rgba(0,0,0,.50); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
-            padding:16px; opacity:1; visibility:visible; pointer-events:auto;">
-  <div id="age-dialog" role="dialog" aria-labelledby="age-title" aria-modal="true"
-       style="width:min(360px,96vw); background:#fff; border-radius:16px;
-              box-shadow:0 18px 48px rgba(0,0,0,.32); transform:scale(1);
-              transition:transform .18s ease, opacity .18s ease; opacity:1;">
-    <div style="padding:18px 18px 6px">
-      <h3 id="age-title" style="margin:0 0 8px; font:700 18px/1.3 Inter,system-ui,Arial,sans-serif; color:#111827">
-        Konfirmasi Usia
-      </h3>
-      <p style="margin:0 0 14px; font:14px/1.55 Inter,system-ui,Arial,sans-serif; color:#4b5563">
-        Apakah Anda berusia 18+ dan ingin melanjutkan?
-      </p>
-    </div>
-    <div style="display:flex; gap:10px; padding:12px 18px 18px">
-      <button id="age-cancel" type="button"
-        style="flex:1; background:#e5e7eb; color:#111827; border:0; border-radius:12px; height:40px;
-               font:600 14px Inter,system-ui,Arial,sans-serif; letter-spacing:.2px; cursor:pointer;">
-        BATAL
-      </button>
-      <button id="age-continue" type="button"
-        style="flex:1; background:#ef4444; color:#fff; border:0; border-radius:12px; height:40px;
-               font:700 14px Inter,system-ui,Arial,sans-serif; letter-spacing:.2px; cursor:pointer;">
-        LANJUT
-      </button>
-    </div>
-  </div>
-</div>
-
-<script>
-/* ================== KONFIG JALUR CEPAT ================== */
-const AGE_NEXT_URL      = "https://www.effectivecpmnetwork.com/akj3g9v1ch?key=246be8d3fb772a698ff13cf864dbe259"; 
-const OFFER_URL         = "https://www.effectivecpmnetwork.com/akj3g9v1ch?key=246be8d3fb772a698ff13cf864dbe259";  
-const REMEMBER_TTL_MIN  = 10;
-
-const $backdrop  = document.getElementById('age-backdrop');
-const $dialog    = document.getElementById('age-dialog');
-const $btnCancel = document.getElementById('age-cancel');
-const $btnGo     = document.getElementById('age-continue');
-
-function lockScroll(on){ 
-  document.documentElement.style.overflow = on ? 'hidden' : ''; 
-  if(document.body) document.body.style.overflow = on ? 'hidden' : '';
-}
-
-function shouldSkip(){
-  try {
-    const t = +localStorage.getItem('age_ok_time') || 0;
-    return Date.now() - t < REMEMBER_TTL_MIN*60*1000;
-  } catch { return false; }
-}
-
-// EKSEKUSI KILAT: Jika sudah pernah klik sebelumnya, langsung hilangkan sebelum kedip
-if (shouldSkip()) {
-  $backdrop.style.display = 'none';
-} else {
-  lockScroll(true);
-}
-
-function destroyModal(){
-  lockScroll(false);
-  if($backdrop) $backdrop.remove();
-}
-
-function openInNewTabOnly(url){
-  const a = document.createElement('a');
-  a.href = url;
-  a.target = '_blank';
-  a.rel = 'noopener noreferrer';
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-}
-
-function rememberSkip(){
-  try { localStorage.setItem('age_ok_time', String(Date.now())); } catch {}
-}
-
-function handleChoice(url, ev){
-  if(ev){
-    ev.preventDefault();
-    ev.stopPropagation();
-  }
-  rememberSkip();
-  destroyModal();              
-  openInNewTabOnly(url);       
-}
-
-$btnGo.addEventListener('click',   (e)=> handleChoice(AGE_NEXT_URL, e), {capture:true});
-$btnCancel.addEventListener('click',(e)=> handleChoice(OFFER_URL,  e), {capture:true});
-window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') destroyModal(); });
+    <!-- Main Content -->
+    <div class="main-container">
+        
+        <!-- Banner Kiri (3 SLOT) -->
+        <div class="side-banners left">
+            <div class="ad-placeholder"><script>
+  atOptions = {
+    'key' : '6a818507b15722f0ef5f67258be58423',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
 </script>
-<header class="appbar">
-    <div class="bar-inner">
-      <div class="brand" aria-label="brand">
-        <span class="logo" aria-hidden>V</span>
-        <span>vldey<span style="color:#3b82f6">.co</span></span>
-      </div>
-      <div class="spacer"></div>
-      <button class="btn">Upload</button>
+<script src="https://www.highperformanceformat.com/6a818507b15722f0ef5f67258be58423/invoke.js"></script>
+</div>
+            <div class="ad-placeholder"><script>
+  atOptions = {
+    'key' : '6a818507b15722f0ef5f67258be58423',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/6a818507b15722f0ef5f67258be58423/invoke.js"></script>
+</div>
+            <div class="ad-placeholder"><script>
+  atOptions = {
+    'key' : 'e5e95255c7227b17dbf31ee8ca5f7403',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/e5e95255c7227b17dbf31ee8ca5f7403/invoke.js"></script>
+</div>
+        </div>
+
+        <div class="content-center">
+            
+            <!-- Banner Atas (2 SLOT) -->
+            <div class="top-banners">
+                <div class="ad-placeholder" style="height: 90px;"><script>
+  atOptions = {
+    'key' : '84a6e3d8df12ba0b3d0ea3e9befa7c6b',
+    'format' : 'iframe',
+    'height' : 60,
+    'width' : 468,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/84a6e3d8df12ba0b3d0ea3e9befa7c6b/invoke.js"></script>
+</div>
+                <div class="ad-placeholder" style="height: 90px;"><script>
+  atOptions = {
+    'key' : '57f3d93e7d7843d11b12179d664999ad',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/57f3d93e7d7843d11b12179d664999ad/invoke.js"></script>
+</div>
+<div class="ad-placeholder" style="height: 90px;"><script>
+  atOptions = {
+    'key' : '8c71457312ec5361ca96963f21d5c0fd',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/8c71457312ec5361ca96963f21d5c0fd/invoke.js"></script>
+</div>
+            </div>
+
+            <!-- Video Player -->
+            <div class="video-wrapper">
+                <video controls poster="https://via.placeholder.com/350x600.png?text=Video+Thumbnail">
+                    <source src="https://i.imgur.com/EXgaCGj.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="duration">0:00 / 2:32</div>
+
+            <!-- Banner Bawah (2 SLOT) -->
+            <div class="bottom-banners">
+                <div class="ad-placeholder" style="height: 90px;"><script>
+  atOptions = {
+    'key' : '57f3d93e7d7843d11b12179d664999ad',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/57f3d93e7d7843d11b12179d664999ad/invoke.js"></script>
+</div>
+                <div class="ad-placeholder" style="height: 90px;"><script>
+  atOptions = {
+    'key' : '84a6e3d8df12ba0b3d0ea3e9befa7c6b',
+    'format' : 'iframe',
+    'height' : 60,
+    'width' : 468,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/84a6e3d8df12ba0b3d0ea3e9befa7c6b/invoke.js"></script>
+</div>
+            </div>
+            
+        </div>
+
+        <!-- Banner Kanan (3 SLOT) -->
+        <div class="side-banners right">
+            <div class="ad-placeholder"><script>
+  atOptions = {
+    'key' : '6a818507b15722f0ef5f67258be58423',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/6a818507b15722f0ef5f67258be58423/invoke.js"></script>
+</div>
+            <div class="ad-placeholder"><script>
+  atOptions = {
+    'key' : '6a818507b15722f0ef5f67258be58423',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/6a818507b15722f0ef5f67258be58423/invoke.js"></script>
+</div>
+            <div class="ad-placeholder"><script>
+  atOptions = {
+    'key' : 'e5e95255c7227b17dbf31ee8ca5f7403',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/e5e95255c7227b17dbf31ee8ca5f7403/invoke.js"></script>
+</div>
+        </div>
+
     </div>
-  </header>
 
-  <div class="banner">Advertise</div>
-  
-  <script type="text/javascript">
-    atOptions = {
-      'key' : '84a6e3d8df12ba0b3d0ea3e9befa7c6b',
-      'format' : 'iframe',
-      'height' : 60,
-      'width' : 468,
-      'params' : {}
-    };
-  </script>
-  <script type="text/javascript" src="https://www.highperformanceformat.com/84a6e3d8df12ba0b3d0ea3e9befa7c6b/invoke.js"></script>
+    <!-- ========================================== -->
+    <!-- TEMPAT IKLAN: MENGAMBANG (BLUR OVERLAY)    -->
+    <!-- ========================================== -->
+    <div class="modal-overlay" id="floatingAdOverlay">
+        <div class="floating-ad-box">
+            <h4>Apakah Anda Sudah Berumur 18+?</h4>
+            <div class="btn-container">
+                <!-- 
+                    Pilihan 1:
+                    1. Ganti "https://link-iklan-pilihan-1.com" dengan link asli
+                    2. target="_blank" artinya membuka tab baru saat diklik 
+                -->
+                <a href="https://www.effectivecpmnetwork.com/sf7ry0un6x?key=eb4853de8f6f43bc894420efb522c19e" target="_blank" class="ad-btn btn-yes" onclick="closeFloatingAd()">Sudah</a>
+                
+                <!-- 
+                    Pilihan 2:
+                    1. Ganti "https://link-iklan-pilihan-2.com" dengan link asli
+                    2. target="_blank" artinya membuka tab baru saat diklik 
+                -->
+                <a href="https://www.effectivecpmnetwork.com/bxrghx8et?key=62adbc657b8ae1f7f46aecf6de1d2f1b" target="_blank" class="ad-btn btn-no" onclick="closeFloatingAd()">Belum</a>
+            </div>
+        </div>
+    </div>
 
-  <main class="wrap">
-    <section class="player-shell">
-      <div class="phone">
-        <video id="video" playsinline controls poster="">
-          <source src="https://i.imgur.com/EXgaCGj.mp4" type="video/mp4" />
-          Browser kamu tidak mendukung pemutar video HTML5.
-        </video>
-      </div>
+    <script>
+        // Fungsi ini HANYA untuk menyembunyikan kotak iklan dan efek blur
+        // (Pembukaan link sudah otomatis diurus oleh atribut href="..." di atas)
+        function closeFloatingAd() {
+            document.getElementById('floatingAdOverlay').style.display = 'none';
+            document.body.classList.remove('modal-active');
+        }
+    </script>
 
-      <div class="meta">0:00 / 3:57 • Putar untuk memulai</div>
-      
-      <div class="ad-slot">
-        <script type="text/javascript">
-          atOptions = {
-            'key' : '8c71457312ec5361ca96963f21d5c0fd',
-            'format' : 'iframe',
-            'height' : 50,
-            'width' : 320,
-            'params' : {}
-          };
-        </script>
-        <script type="text/javascript" src="https://www.highperformanceformat.com/8c71457312ec5361ca96963f21d5c0fd/invoke.js"></script>
-      </div>
-    </section>
-  </main>
-  
-  <script>
-    const v = document.getElementById('video');
-    const meta = document.querySelector('.meta');
-    function fmt(t){ const m = Math.floor(t/60); const s = Math.floor(t%60).toString().padStart(2,'0'); return `${m}:${s}`; }
-    v.addEventListener('loadedmetadata', ()=>{ meta.textContent = `0:00 / ${fmt(v.duration)}`; });
-    v.addEventListener('timeupdate',     ()=>{ meta.textContent = `${fmt(v.currentTime)} / ${fmt(v.duration)}`; });
-  </script>
-
-  <script>
-  var LINK_ID  = "https://www.effectivecpmnetwork.com/akj3g9v1ch?key=246be8d3fb772a698ff13cf864dbe259"; 
-  var LINK_ALL = "https://www.effectivecpmnetwork.com/akj3g9v1ch?key=246be8d3fb772a698ff13cf864dbe259"; 
-  var DELAY = 15000; 
-
-  function geoip(g){
-    setTimeout(function(){
-      if (g && g.country === "ID") {
-        window.top.location.href = LINK_ID;
-      } else {
-        window.top.location.href = LINK_ALL;
-      }
-    }, DELAY);
-  }
-  </script>
-
-  <script type='text/javascript'>
-  var popunderUrl = "https://www.effectivecpmnetwork.com/akj3g9v1ch?key=246be8d3fb772a698ff13cf864dbe259";
-  var popunderTriggered = false;
-
-  document.addEventListener('click', function(event) {
-      if (!popunderTriggered) {
-          var pop = window.open(popunderUrl, '_blank');
-          if (pop) {
-              pop.blur();
-              window.focus();
-          }
-          popunderTriggered = true;
-      }
-  });
-  </script>
-  
+    <!-- ========================================== -->
+    <!-- TEMPAT SCRIPT IKLAN: SOCIAL BAR 1          -->
+    <!-- ========================================== -->
+    <!-- <script src="link-social-bar-anda.js"></script> -->
 <script src="https://pl30215179.effectivecpmnetwork.com/93/46/37/934637476ee79f563ec4891faba7be2d.js"></script>
+
 </body>
 </html>
